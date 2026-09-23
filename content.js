@@ -16,7 +16,7 @@ window.HUB_CONTENT = {
 
   /* Your WhatsApp number in international format, no + or spaces.
      Example: "60123456789". Leave as "" and students choose the contact. */
-  lecturerWhatsApp: "",
+  lecturerWhatsApp: "60166176823",
 
   /* ---------- Week 1: Idea Validation — hint text in each box ---------- */
   ideaExamples: {
