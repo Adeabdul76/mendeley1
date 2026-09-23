@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entrepreneurship Tutorial Hub</title>
+<meta name="description" content="Weekly entrepreneurship tutorials: idea validation, business model canvas, financial planning and marketing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <nav class="tabs" role="tablist" aria-label="Tutorials">
+    <button class="tab" role="tab" data-tab="home" id="tab-home">Home</button>
+    <button class="tab" role="tab" data-tab="idea" id="tab-idea"><span class="wk">W1</span> Idea<span class="long"> Validation</span></button>
+    <button class="tab" role="tab" data-tab="bmc" id="tab-bmc"><span class="wk">W2</span> BMC</button>
+    <button class="tab" role="tab" data-tab="finance" id="tab-finance"><span class="wk">W3</span> Financials</button>
+    <button class="tab" role="tab" data-tab="marketing" id="tab-marketing"><span class="wk">W4</span> Marketing</button>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<!-- ============ HOME ============ -->
+<section class="panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home">
+  <div class="hero">
+    <p class="eyebrow">Diploma · Entrepreneurship</p>
+    <h1 id="home-title">Entrepreneurship Tutorial Toolkit - Dr Suleiman</h1>
+    <p class="lead">Choose your tutorial for this week.</p>
+  </div>
+
+  <div class="week-grid">
+    <button class="week" data-go="idea">
+      <span class="week-no">Week 1</span>
+      <span class="week-name">Idea Validation</span>
+      <span class="week-desc">Is your business idea worth doing?</span>
+      <span class="week-prog" id="prog-idea"></span>
+    </button>
+    <button class="week" data-go="bmc">
+      <span class="week-no">Week 2</span>
+      <span class="week-name">BMC</span>
+      <span class="week-desc">Business Model Canvas on one page</span>
+      <span class="week-prog" id="prog-bmc"></span>
+    </button>
+    <button class="week" data-go="finance">
+      <span class="week-no">Week 3</span>
+      <span class="week-name">Financials</span>
+      <span class="week-desc">Profit, break-even and cashflow in RM</span>
+      <span class="week-prog" id="prog-finance"></span>
+    </button>
+    <button class="week" data-go="marketing">
+      <span class="week-no">Week 4</span>
+      <span class="week-name">Marketing</span>
+      <span class="week-desc">TikTok, Instagram and pricing plan</span>
+      <span class="week-prog" id="prog-marketing"></span>
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>Your details</h2>
+    <p class="muted">Fill in once. They appear on your PDFs and your submission to the lecturer.</p>
+    <div class="grid3">
+      <label class="field"><span>Full name</span><input id="p-name" data-bind="profile.name" autocomplete="name" placeholder="e.g. Nur Aina binti Ahmad"></label>
+      <label class="field"><span>Matric / student no.</span><input id="p-matric" data-bind="profile.matric" placeholder="e.g. 2024123456"></label>
+      <label class="field"><span>Class / group</span><input id="p-group" data-bind="profile.group" placeholder="e.g. DBA 2A"></label>
+    </div>
+  </div>
+
+  <div class="card quiet">
+    <h2>How this works</h2>
+    <ul class="howto">
+      <li>Everything you type <strong>saves automatically</strong> in this browser. No login needed.</li>
+      <li>Use the same phone or laptop each week so your work is still there.</li>
+      <li>At the end of each tutorial, press <strong>Submit to Lecturer</strong>, copy the text and send it on WhatsApp.</li>
+    </ul>
+  </div>
+
+  <div class="submit-area" data-submit="all">
+    <button class="btn btn-submit" data-action="submit" data-which="all">Submit all 4 tutorials to Lecturer</button>
+  </div>
+</section>
+
+<!-- ============ WEEK 1: IDEA VALIDATION ============ -->
+<section class="panel" id="panel-idea" role="tabpanel" aria-labelledby="tab-idea" hidden>
+  <div class="panel-head">
+    <p class="eyebrow">Tutorial 1</p>
+    <h1>Idea Validation</h1>
+    <p class="lead">Before spending money, check if real people in Malaysia actually want your idea.</p>
+  </div>
+
+  <div class="card">
+    <label class="field big"><span>What is your business idea?</span>
+      <textarea id="idea-idea" data-bind="idea.idea" rows="2" data-hint="idea"></textarea>
+    </label>
+  </div>
+
+  <div class="card">
+    <h2>Validation checklist</h2>
+    <p class="muted">Answer each question, then tick the box when you are happy with your answer.</p>
+    <ol class="checklist">
+      <li>
+        <label class="tick"><input type="checkbox" id="idea-c1" data-bind="idea.c1"><span>What problem does it solve?</span></label>
+        <textarea id="idea-q1" data-bind="idea.q1" rows="2" data-hint="problem"></textarea>
+      </li>
+      <li>
+        <label class="tick"><input type="checkbox" id="idea-c2" data-bind="idea.c2"><span>Who has this problem in Malaysia?</span></label>
+        <textarea id="idea-q2" data-bind="idea.q2" rows="2" data-hint="who"></textarea>
+      </li>
+      <li>
+        <label class="tick"><input type="checkbox" id="idea-c3" data-bind="idea.c3"><span>How do they solve it now?</span></label>
+        <textarea id="idea-q3" data-bind="idea.q3" rows="2" data-hint="now"></textarea>
+      </li>
+      <li>
+        <label class="tick"><input type="checkbox" id="idea-c4" data-bind="idea.c4"><span>Why is your solution better?</span></label>
+        <textarea id="idea-q4" data-bind="idea.q4" rows="2" data-hint="better"></textarea>
+      </li>
+      <li>
+        <label class="tick"><input type="checkbox" id="idea-c5" data-bind="idea.c5"><span>Interview 3 potential customers - write their feedback</span></label>
+        <div class="interviews">
+          <label class="field"><span>Customer 1</span><textarea id="idea-i1" data-bind="idea.i1" rows="2" data-hint="interview"></textarea></label>
+          <label class="field"><span>Customer 2</span><textarea id="idea-i2" data-bind="idea.i2" rows="2" placeholder="Name, age, job - and what they said"></textarea></label>
+          <label class="field"><span>Customer 3</span><textarea id="idea-i3" data-bind="idea.i3" rows="2" placeholder="Name, age, job - and what they said"></textarea></label>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="btn-score">Generate Validation Score out of 10</button>
+    <button class="btn" data-action="pdf" data-which="idea">Download as PDF</button>
+  </div>
+
+  <div class="result" id="score-box" hidden>
+    <div class="score-dial"><span id="score-num">0</span><small>/ 10</small></div>
+    <div>
+      <p class="score-verdict" id="score-verdict"></p>
+      <ul class="tips" id="score-tips"></ul>
+    </div>
+  </div>
+
+  <div class="tab-foot">
+    <button class="btn btn-ghost" data-action="clear" data-which="idea">Clear this tutorial</button>
+    <div class="submit-area" data-submit="idea"><button class="btn btn-submit" data-action="submit" data-which="idea">Submit to Lecturer</button></div>
+  </div>
+</section>
+
+<!-- ============ WEEK 2: BMC ============ -->
+<section class="panel" id="panel-bmc" role="tabpanel" aria-labelledby="tab-bmc" hidden>
+  <div class="panel-head">
+    <p class="eyebrow">Tutorial 2</p>
+    <h1>Business Model Canvas</h1>
+    <p class="lead">Explain how your business works on one page. Grey text in each box shows an example from <strong class="bmc-brand">Tealive</strong>.</p>
+  </div>
+
+  <div class="bmc-status" id="bmc-status"></div>
+
+  <div class="bmc" id="bmc-grid">
+    <label class="bmc-box a-cs"><span class="bmc-t">Customer Segments</span><small>Who are your customers?</small><textarea id="bmc-customerSegments" data-bind="bmc.customerSegments" data-bmc="customerSegments"></textarea></label>
+    <label class="bmc-box a-vp"><span class="bmc-t">Value Proposition</span><small>Why will they buy from you?</small><textarea id="bmc-valueProposition" data-bind="bmc.valueProposition" data-bmc="valueProposition"></textarea></label>
+    <label class="bmc-box a-ch"><span class="bmc-t">Channels</span><small>How do customers find and buy?</small><textarea id="bmc-channels" data-bind="bmc.channels" data-bmc="channels"></textarea></label>
+    <label class="bmc-box a-cr"><span class="bmc-t">Customer Relationships</span><small>How do you keep them coming back?</small><textarea id="bmc-customerRelationships" data-bind="bmc.customerRelationships" data-bmc="customerRelationships"></textarea></label>
+    <label class="bmc-box a-rs"><span class="bmc-t">Revenue Streams</span><small>How do you make money?</small><textarea id="bmc-revenueStreams" data-bind="bmc.revenueStreams" data-bmc="revenueStreams"></textarea></label>
+    <label class="bmc-box a-kr"><span class="bmc-t">Key Resources</span><small>What do you need to have?</small><textarea id="bmc-keyResources" data-bind="bmc.keyResources" data-bmc="keyResources"></textarea></label>
+    <label class="bmc-box a-ka"><span class="bmc-t">Key Activities</span><small>What must you do every day?</small><textarea id="bmc-keyActivities" data-bind="bmc.keyActivities" data-bmc="keyActivities"></textarea></label>
+    <label class="bmc-box a-kp"><span class="bmc-t">Key Partners</span><small>Who helps you?</small><textarea id="bmc-keyPartners" data-bind="bmc.keyPartners" data-bmc="keyPartners"></textarea></label>
+    <label class="bmc-box a-cost"><span class="bmc-t">Cost Structure</span><small>What are your main costs?</small><textarea id="bmc-costStructure" data-bind="bmc.costStructure" data-bmc="costStructure"></textarea></label>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="btn-bmc-save">Save</button>
+    <button class="btn" id="btn-bmc-check">Is my BMC complete?</button>
+    <button class="btn" data-action="pdf" data-which="bmc">Download BMC as PDF</button>
+  </div>
+  <div class="result slim" id="bmc-check-box" hidden></div>
+
+  <div class="tab-foot">
+    <button class="btn btn-ghost" data-action="clear" data-which="bmc">Clear this tutorial</button>
+    <div class="submit-area" data-submit="bmc"><button class="btn btn-submit" data-action="submit" data-which="bmc">Submit to Lecturer</button></div>
+  </div>
+</section>
+
+<!-- ============ WEEK 3: FINANCIALS ============ -->
+<section class="panel" id="panel-finance" role="tabpanel" aria-labelledby="tab-finance" hidden>
+  <div class="panel-head">
+    <p class="eyebrow">Tutorial 3</p>
+    <h1>Financial Planning for Startup</h1>
+    <p class="lead">Type your numbers. The answers calculate by themselves.</p>
+  </div>
+
+  <div class="card">
+    <div class="fin-inputs">
+      <label class="field"><span>Product price</span><div class="rm"><i>RM</i><input id="fin-price" data-bind="fin.price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="5.00"></div></label>
+      <label class="field"><span>Cost per product</span><div class="rm"><i>RM</i><input id="fin-cost" data-bind="fin.cost" type="number" inputmode="decimal" min="0" step="0.01" placeholder="2.50"></div></label>
+      <label class="field"><span>Monthly rent</span><div class="rm"><i>RM</i><input id="fin-rent" data-bind="fin.rent" type="number" inputmode="decimal" min="0" step="1" placeholder="800"></div></label>
+      <label class="field"><span>Staff salary (per month)</span><div class="rm"><i>RM</i><input id="fin-salary" data-bind="fin.salary" type="number" inputmode="decimal" min="0" step="1" placeholder="1700"></div></label>
+      <label class="field"><span>Expected units sold per month</span><div class="rm"><i>units</i><input id="fin-units" data-bind="fin.units" type="number" inputmode="numeric" min="0" step="1" placeholder="1500"></div></label>
+      <label class="field"><span>Starting capital <em>(optional)</em></span><div class="rm"><i>RM</i><input id="fin-capital" data-bind="fin.capital" type="number" inputmode="decimal" min="0" step="1" placeholder="0"></div></label>
+    </div>
+    <button class="btn btn-ghost small" id="btn-fin-example">Load example: <span id="fin-example-name">Nasi lemak stall</span></button>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><span class="kpi-l">Profit per unit</span><span class="kpi-v" id="k-ppu">-</span><span class="kpi-n" id="k-ppu-n">Price minus cost</span></div>
+    <div class="kpi"><span class="kpi-l">Monthly profit</span><span class="kpi-v" id="k-month">-</span><span class="kpi-n" id="k-month-n">After rent and salary</span></div>
+    <div class="kpi"><span class="kpi-l">Break-even units</span><span class="kpi-v" id="k-be">-</span><span class="kpi-n" id="k-be-n">Units to sell per month to cover all costs</span></div>
+  </div>
+
+  <p class="explain" id="fin-explain"></p>
+
+  <div class="card">
+    <h2>6-month cashflow</h2>
+    <p class="muted">Assumes you sell the same number of units every month.</p>
+    <div class="table-scroll">
+      <table class="cash" id="cash-table">
+        <thead><tr><th>Month</th><th>Cash in (sales)</th><th>Product cost</th><th>Rent</th><th>Salary</th><th>Net cashflow</th><th>Cash balance</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" data-action="pdf" data-which="finance">Download Financial Plan PDF</button>
+  </div>
+
+  <div class="tab-foot">
+    <button class="btn btn-ghost" data-action="clear" data-which="finance">Clear this tutorial</button>
+    <div class="submit-area" data-submit="finance"><button class="btn btn-submit" data-action="submit" data-which="finance">Submit to Lecturer</button></div>
+  </div>
+</section>
+
+<!-- ============ WEEK 4: MARKETING ============ -->
+<section class="panel" id="panel-marketing" role="tabpanel" aria-labelledby="tab-marketing" hidden>
+  <div class="panel-head">
+    <p class="eyebrow">Tutorial 4</p>
+    <h1>Marketing for New Venture</h1>
+    <p class="lead">Fill in two blanks and get a starter marketing plan for Malaysian customers.</p>
+  </div>
+
+  <div class="card">
+    <div class="madlib">
+      <label class="field"><span>My product is</span><input id="mkt-product" data-bind="mkt.product" placeholder="e.g. homemade sambal in jars"></label>
+      <label class="field"><span>My target customer is</span><input id="mkt-customer" data-bind="mkt.customer" placeholder="e.g. working adults in Klang Valley"></label>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-mkt-gen">Generate my marketing plan</button>
+      <button class="btn" id="btn-mkt-more" hidden>Give me different ideas</button>
+    </div>
+  </div>
+
+  <div id="mkt-out" hidden>
+    <div class="card">
+      <h2>1. TikTok content ideas for Malaysia</h2>
+      <ol class="gen" id="mkt-tiktok"></ol>
+    </div>
+    <div class="card">
+      <h2>2. Instagram caption drafts</h2>
+      <div id="mkt-ig" class="captions"></div>
+    </div>
+    <div class="card">
+      <h2>3. Poster headline</h2>
+      <p class="poster" id="mkt-poster"></p>
+    </div>
+    <div class="card">
+      <h2>4. Pricing strategy suggestion</h2>
+      <p class="pill" id="mkt-price-pill"></p>
+      <p id="mkt-price-why"></p>
+      <p class="muted" id="mkt-price-calc"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Action checklist</h2>
+    <label class="tick"><input type="checkbox" id="mkt-posted" data-bind="mkt.posted"><span>Have you posted?</span></label>
+    <label class="tick"><input type="checkbox" id="mkt-first" data-bind="mkt.first"><span>Have you got your first customer?</span></label>
+    <label class="field"><span>Notes (link to your post, who bought, how much)</span><textarea id="mkt-notes" data-bind="mkt.notes" rows="2" placeholder="e.g. Posted on TikTok 12/9, 540 views. First customer: my neighbour bought 2 jars (RM24)."></textarea></label>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" data-action="pdf" data-which="marketing">Download Marketing Plan PDF</button>
+  </div>
+
+  <div class="tab-foot">
+    <button class="btn btn-ghost" data-action="clear" data-which="marketing">Clear this tutorial</button>
+    <div class="submit-area" data-submit="marketing"><button class="btn btn-submit" data-action="submit" data-which="marketing">Submit to Lecturer</button></div>
+  </div>
+</section>
+
+</main>
+
+<!-- Submission sheet (one shared panel) -->
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <h2 id="sheet-title">Submit to Lecturer</h2>
+    <p class="muted">Copy this text and send it to your lecturer on WhatsApp.</p>
+    <textarea id="sheet-text" readonly rows="12"></textarea>
+    <div class="actions">
+      <button class="btn btn-primary" id="btn-copy">Copy text</button>
+      <a class="btn btn-wa" id="btn-wa" href="#" target="_blank" rel="noopener">Open WhatsApp</a>
+      <button class="btn btn-ghost" id="btn-sheet-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<footer class="foot"><span id="save-state">Your work saves automatically in this browser.</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
