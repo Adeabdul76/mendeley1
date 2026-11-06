@@ -88,7 +88,7 @@ const LANGUAGES = [
    ------------------------------------------------------------------- */
 const LESSONS = {
   L1: {
-    url: "LESSON_1_URL", // ← REPLACE with the full video link, starting with https://
+    url: "https://www.canva.com/design/DAHaGkUPIEQ/anK-52S5JEBUX5bX8R_jdw/view?utm_content=DAHaGkUPIEQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5d86ff8836", // Canva lesson (public view link)
     title: {
       ms: "Bekerja dengan Selamat bersama Cobot",
       en: "Working Safely with Cobots",
@@ -97,7 +97,7 @@ const LESSONS = {
     },
   },
   L2: {
-    url: "LESSON_2_URL", // ← REPLACE
+    url: "https://www.canva.com/design/DAHaGsTS9RM/wU4jsOJfHVzONM0OXaGH5w/view?utm_content=DAHaGsTS9RM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h500d6cad3c", // Canva lesson (public view link)
     title: {
       ms: "Asas Pemeriksaan Kualiti Visual",
       en: "Visual Quality Inspection Basics",
@@ -106,7 +106,7 @@ const LESSONS = {
     },
   },
   L3: {
-    url: "LESSON_3_URL", // ← REPLACE
+    url: "https://www.canva.com/design/DAHaGv-8L9I/ocAEMAF9f8FEJpAAGyHMqg/view?utm_content=DAHaGv-8L9I&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hac0bedffce", // Canva lesson (public view link)
     title: {
       ms: "5S dan Penyelenggaraan Pencegahan",
       en: "5S and Preventive Maintenance",
