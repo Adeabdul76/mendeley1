@@ -133,6 +133,18 @@ body {
 .reply.link { background: var(--teal); border-color: var(--teal); color: #08332F; }
 .reply.link::after { content: "↗"; font-weight: 700; }
 
+.reply[hidden] { display: none; }
+.reply.play::after { content: none; }
+.reply.play::before { content: "▶"; font-size: 15px; }
+
+.lesson-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 14px;
+}
+.lesson-video[hidden] { display: none; }
+
 .reply.gold { background: var(--gold); border-color: var(--gold); color: var(--navy); }
 
 .reply.toggle::before {
