@@ -7,7 +7,7 @@
    to content.js show up straight away. If you add a new file to the app,
    add it to the list below and change the version number. */
 
-const CACHE_NAME = "naiktaraf-v1";
+const CACHE_NAME = "naiktaraf-v2";
 const APP_FILES = [
   "./",
   "index.html",
