@@ -32,11 +32,11 @@ const SETTINGS = {
   // Copy each entry number into the matching place below.
 
   // The Form link up to and including "viewform" (nothing after it).
-  FORM_BASE_URL: "https://docs.google.com/forms/d/e/FORM_ID/viewform", // ← REPLACE
+  FORM_BASE_URL: "https://docs.google.com/forms/d/e/1FAIpQLSdUcixZspOLeg1kGju-RDoUT_Tg4ZX-njTXuRqGzWfx0rbWaQ/viewform",
 
   // Required fields
-  CODE_ENTRY_ID:  "entry.111",   // ← REPLACE: Form question "Participant code"
-  STAGE_ENTRY_ID: "entry.222",   // ← REPLACE: Form question "Stage"
+  CODE_ENTRY_ID:  "entry.1677419179",  // Form question "Participant code"
+  STAGE_ENTRY_ID: "entry.942965475",   // Form question "Stage"
 
   // The option text in the Form's "Stage" question. It must match EXACTLY,
   // including capital letters.
@@ -46,13 +46,13 @@ const SETTINGS = {
   // Extra fields: the check-in answers, sent in English so your data is
   // consistent whichever language the worker used. In the Form, make each
   // of these a "Short answer" question. To stop sending one, leave it as "".
-  Q1_ENTRY_ID:       "entry.333",  // ← REPLACE: "Current job"
-  Q2_ENTRY_ID:       "entry.444",  // ← REPLACE: "Years in manufacturing"
-  Q3_ENTRY_ID:       "entry.555",  // ← REPLACE: "Skills already confident in"
-  Q4_ENTRY_ID:       "entry.666",  // ← REPLACE: "Work interest"
-  Q5_ENTRY_ID:       "entry.777",  // ← REPLACE: "Break time available"
-  ROLE_ENTRY_ID:     "entry.888",  // ← REPLACE: "Recommended role"
-  LANGUAGE_ENTRY_ID: "entry.999",  // ← REPLACE: "Chatbot language"
+  Q1_ENTRY_ID:       "entry.876157530",   // "Current job"
+  Q2_ENTRY_ID:       "entry.1842294735",  // "Years in manufacturing"
+  Q3_ENTRY_ID:       "entry.831979472",   // "Skills already confident in"
+  Q4_ENTRY_ID:       "entry.1354644003",  // "Work interest"
+  Q5_ENTRY_ID:       "entry.65465296",    // "Break time available"
+  ROLE_ENTRY_ID:     "entry.1195738184",  // "Recommended role"
+  LANGUAGE_ENTRY_ID: "entry.1046190184",  // "Chatbot language"
 
   // When true, the "Done" / "I've finished the check" button stays locked
   // until the worker has tapped the link to open the lesson or the check.
