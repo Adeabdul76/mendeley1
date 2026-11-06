@@ -7,7 +7,7 @@
    to content.js show up straight away. If you add a new file to the app,
    add it to the list below and change the version number. */
 
-const CACHE_NAME = "naiktaraf-v2";
+const CACHE_NAME = "naiktaraf-v3";
 const APP_FILES = [
   "./",
   "index.html",
@@ -36,6 +36,8 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
+  // Lesson videos are streamed straight from the internet, not saved on the phone
+  if (request.headers.has("range") || /\.mp4$/i.test(new URL(request.url).pathname)) return;
 
   event.respondWith(
     fetch(request)

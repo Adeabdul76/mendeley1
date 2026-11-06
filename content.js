@@ -84,11 +84,13 @@ const LANGUAGES = [
 
 
 /* ---------------------------------------------------------------------
-   3. LESSONS — titles and video links
+   3. LESSONS — titles and videos
+   url can be an MP4 file in the assets/lessons/ folder (plays inside the
+   chat), or a full https:// link (opens in a new tab).
    ------------------------------------------------------------------- */
 const LESSONS = {
   L1: {
-    url: "https://www.canva.com/design/DAHaGkUPIEQ/anK-52S5JEBUX5bX8R_jdw/view?utm_content=DAHaGkUPIEQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5d86ff8836", // Canva lesson (public view link)
+    url: "assets/lessons/lesson1.mp4", // made from the Canva lesson DAHaGkUPIEQ
     title: {
       ms: "Bekerja dengan Selamat bersama Cobot",
       en: "Working Safely with Cobots",
@@ -97,7 +99,7 @@ const LESSONS = {
     },
   },
   L2: {
-    url: "https://www.canva.com/design/DAHaGsTS9RM/wU4jsOJfHVzONM0OXaGH5w/view?utm_content=DAHaGsTS9RM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h500d6cad3c", // Canva lesson (public view link)
+    url: "assets/lessons/lesson2.mp4", // made from the Canva lesson DAHaGsTS9RM
     title: {
       ms: "Asas Pemeriksaan Kualiti Visual",
       en: "Visual Quality Inspection Basics",
@@ -106,7 +108,7 @@ const LESSONS = {
     },
   },
   L3: {
-    url: "https://www.canva.com/design/DAHaGv-8L9I/ocAEMAF9f8FEJpAAGyHMqg/view?utm_content=DAHaGv-8L9I&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hac0bedffce", // Canva lesson (public view link)
+    url: "assets/lessons/lesson3.mp4", // made from the Canva lesson DAHaGv-8L9I
     title: {
       ms: "5S dan Penyelenggaraan Pencegahan",
       en: "5S and Preventive Maintenance",

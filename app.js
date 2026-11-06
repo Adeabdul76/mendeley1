@@ -423,6 +423,52 @@
     if (hint) box.appendChild(hint);
   }
 
+  function isVideoFile(url) { return /\.mp4(\?.*)?$/i.test(url || ""); }
+
+  // "Watch" button that shows and plays the lesson video inside the chat,
+  // then unlocks the "Done" button.
+  function videoStep(box, watchLabel, url, doneLabel, onDone) {
+    var doneBtn = makeButton(doneLabel, onDone, "primary");
+    var hint = null;
+    if (SETTINGS.REQUIRE_OPEN_BEFORE_DONE && !state.opened) {
+      doneBtn.disabled = true;
+      hint = document.createElement("p");
+      hint.className = "hint";
+      hint.textContent = msg("hintTapFirst", { button: watchLabel });
+    }
+
+    var player = document.createElement("video");
+    player.className = "lesson-video";
+    player.src = url;
+    player.controls = true;
+    player.preload = "metadata";
+    player.setAttribute("playsinline", "");
+    player.hidden = true;
+
+    var watchBtn = document.createElement("button");
+    watchBtn.type = "button";
+    watchBtn.className = "reply link play";
+    watchBtn.textContent = watchLabel;
+    var drawnFor = stepKey();
+    watchBtn.addEventListener("click", function () {
+      if (stepKey() !== drawnFor) return;
+      watchBtn.hidden = true;
+      player.hidden = false;
+      var playing = player.play();
+      if (playing && playing.catch) playing.catch(function () { /* worker can press play */ });
+      state.opened = true;
+      saveState();
+      doneBtn.disabled = false;
+      if (hint) hint.hidden = true;
+      player.scrollIntoView({ block: "center", behavior: "smooth" });
+    });
+
+    box.appendChild(watchBtn);
+    box.appendChild(player);
+    box.appendChild(doneBtn);
+    if (hint) box.appendChild(hint);
+  }
+
   function renderControls() {
     removeControls();
     inputBar.hidden = state.step !== "code";
@@ -470,8 +516,12 @@
 
     } else if (step === "lesson") {
       var lesson = LESSONS[lessonIdAt(state.lessonIndex)] || {};
-      linkStep(box, msg("btnWatch", { n: state.lessonIndex + 1 }), lesson.url, isRealLink(lesson.url),
-        msg("btnDone"), finishLesson);
+      var watchLabel = msg("btnWatch", { n: state.lessonIndex + 1 });
+      if (isVideoFile(lesson.url)) {
+        videoStep(box, watchLabel, lesson.url, msg("btnDone"), finishLesson);
+      } else {
+        linkStep(box, watchLabel, lesson.url, isRealLink(lesson.url), msg("btnDone"), finishLesson);
+      }
     }
 
     if (box.childNodes.length) chatEl.appendChild(box);

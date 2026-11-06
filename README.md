@@ -15,6 +15,7 @@ one link: no app download and no login.
 | `sw.js` | Lets the app open without internet after the first visit | Rarely |
 | `assets/logo.png`, `assets/badge.png` | Images. These are placeholders, so replace them with your designer's versions (keep the same file names) | Designer |
 | `CLAUDE.md` | The project brief | Team |
+| `assets/lessons/lesson1.mp4` … `lesson3.mp4` | The 3 lesson videos (made from the Canva lessons). They play inside the chat. To replace one, upload a new MP4 with the same name | Team |
 | `forms/create-google-form.gs` | One-click builder for the Pre/Post Skills Check Google Form (10 questions, BM/English, answers go to a Google Sheet) | Run once |
 
 ## Before launch: things to replace in `content.js`
