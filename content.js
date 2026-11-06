@@ -90,7 +90,7 @@ const LANGUAGES = [
    ------------------------------------------------------------------- */
 const LESSONS = {
   L1: {
-    url: "assets/lessons/lesson1.mp4?v=2", // made from the Canva lesson DAHaGkUPIEQ
+    url: "assets/lessons/lesson1.mp4?v=3", // made from the Canva lesson DAHaGkUPIEQ
     title: {
       ms: "Bekerja dengan Selamat bersama Cobot",
       en: "Working Safely with Cobots",
@@ -99,7 +99,7 @@ const LESSONS = {
     },
   },
   L2: {
-    url: "assets/lessons/lesson2.mp4?v=2", // made from the Canva lesson DAHaGsTS9RM
+    url: "assets/lessons/lesson2.mp4?v=3", // made from the Canva lesson DAHaGsTS9RM
     title: {
       ms: "Asas Pemeriksaan Kualiti Visual",
       en: "Visual Quality Inspection Basics",
@@ -108,7 +108,7 @@ const LESSONS = {
     },
   },
   L3: {
-    url: "assets/lessons/lesson3.mp4?v=2", // made from the Canva lesson DAHaGv-8L9I
+    url: "assets/lessons/lesson3.mp4?v=3", // made from the Canva lesson DAHaGv-8L9I
     title: {
       ms: "5S dan Penyelenggaraan Pencegahan",
       en: "5S and Preventive Maintenance",
