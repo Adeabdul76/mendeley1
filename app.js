@@ -312,6 +312,21 @@
       ctx.font = "bold " + Math.round(w * 0.09) + "px sans-serif";
       ctx.fillText("LEVEL 1", w / 2, h * 0.45);
     }
+    if (SETTINGS.BADGE_TEXT_PANEL) {
+      // White rounded label behind the code and date, so they are always readable
+      var top = h * (SETTINGS.BADGE_CODE_Y - SETTINGS.BADGE_CODE_SIZE * 0.95);
+      var bottom = h * (SETTINGS.BADGE_DATE_Y + SETTINGS.BADGE_DATE_SIZE * 0.95);
+      var pw = w * 0.46, px = (w - pw) / 2, ph = bottom - top, r = ph * 0.25;
+      ctx.fillStyle = "#FFFFFF";
+      ctx.beginPath();
+      ctx.moveTo(px + r, top);
+      ctx.arcTo(px + pw, top, px + pw, bottom, r);
+      ctx.arcTo(px + pw, bottom, px, bottom, r);
+      ctx.arcTo(px, bottom, px, top, r);
+      ctx.arcTo(px, top, px + pw, top, r);
+      ctx.closePath();
+      ctx.fill();
+    }
     ctx.fillStyle = SETTINGS.BADGE_TEXT_COLOUR;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";

@@ -62,10 +62,11 @@ const SETTINGS = {
   // Where the participant code and date are written on assets/badge.png.
   // Numbers are fractions of the image size: 0.5 = middle, 0.9 = near the bottom.
   BADGE_TEXT_COLOUR: "#1F3864",
-  BADGE_CODE_Y: 0.735,
-  BADGE_DATE_Y: 0.81,
-  BADGE_CODE_SIZE: 0.065,   // text height as a fraction of the badge width
-  BADGE_DATE_SIZE: 0.045,
+  BADGE_TEXT_PANEL: false,  // true = draw a white label behind the code and date (not needed: the Canva badge has its own white box)
+  BADGE_CODE_Y: 0.716,
+  BADGE_DATE_Y: 0.78,
+  BADGE_CODE_SIZE: 0.055,   // text height as a fraction of the badge width
+  BADGE_DATE_SIZE: 0.04,
 };
 
 
