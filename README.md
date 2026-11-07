@@ -18,6 +18,19 @@ one link: no app download and no login.
 | `assets/lessons/lesson1.mp4` … `lesson3.mp4` | The 3 lesson videos (made from the Canva lessons). They play inside the chat. To replace one, upload a new MP4 with the same name | Team |
 | `forms/create-google-form.gs` | One-click builder for the Pre/Post Skills Check Google Form (10 questions, BM/English, answers go to a Google Sheet) | Run once |
 
+## How the chatbot works (for workers)
+
+1. Choose a language, agree to the privacy note, and enter the participant code.
+2. Answer 5 tap-to-answer check-in questions and get a recommended next role.
+3. Answer a 10-question **pre-assessment inside the chat**.
+4. Watch 3 short lesson videos inside the chat. The chat moves on by itself when a video ends.
+5. Answer the same 10 questions as a **final assessment** and see the before and after scores.
+6. Download the Level 1 badge.
+
+A progress bar at the top shows which of the 5 stages the worker is in.
+
+**Where the answers go:** both assessments are sent automatically, in the background, to the Google Form and then into the "NaikTaraf.AI – Responses" Google Sheet (one row for "Pre" and one for "Post"). Google marks each row out of 10. If a phone is offline, the answers are kept on the phone and sent the next time the chatbot is opened with internet.
+
 ## Before launch: things to replace in `content.js`
 
 1. **Lesson videos:** replace `LESSON_1_URL`, `LESSON_2_URL` and `LESSON_3_URL` with full links starting with `https://`.

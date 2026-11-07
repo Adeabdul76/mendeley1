@@ -18,6 +18,13 @@
       <button type="button" id="start-again" class="start-again">Mula semula</button>
     </header>
 
+    <div class="progress" aria-live="polite">
+      <div class="progress-steps" id="progress-steps" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <p class="progress-label" id="progress-label"></p>
+    </div>
+
     <main id="chat" class="chat" aria-live="polite"></main>
 
     <form id="input-bar" class="input-bar" hidden>
