@@ -16,6 +16,7 @@ one link: no app download and no login.
 | `assets/logo.png`, `assets/badge.png` | Images. These are placeholders, so replace them with your designer's versions (keep the same file names) | Designer |
 | `CLAUDE.md` | The project brief | Team |
 | `assets/lessons/lesson1.mp4` … `lesson3.mp4` | The 3 lesson videos (made from the Canva lessons). They play inside the chat. To replace one, upload a new MP4 with the same name | Team |
+| `print/qr-poster-A4.pdf`, `print/qr-code.png` / `.svg` | QR code that opens the chatbot, and a printable A4 poster with a box to write each worker's participant code | Team |
 | `forms/create-google-form.gs` | One-click builder for the Pre/Post Skills Check Google Form (10 questions, BM/English, answers go to a Google Sheet) | Run once |
 
 ## How the chatbot works (for workers)

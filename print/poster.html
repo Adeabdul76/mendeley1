@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<title>NaikTaraf.AI – QR Poster</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Noto Sans", "Segoe UI", Roboto, Arial, sans-serif; color: #1F3864; background: #fff; }
+  .page { width: 210mm; height: 297mm; display: flex; flex-direction: column; overflow: hidden; }
+  header { background: #1F3864; color: #fff; padding: 14mm 14mm 10mm; display: flex; align-items: center; gap: 6mm; }
+  header img { width: 24mm; height: 24mm; border-radius: 5mm; }
+  .brand { font-size: 15mm; font-weight: 800; letter-spacing: 0.3mm; }
+  .brand span { color: #2EC4B6; }
+  .tag { font-size: 5mm; opacity: 0.9; margin-top: 1mm; }
+  main { flex: 1; padding: 10mm 14mm 0; text-align: center; background: #F4F7FB; }
+  h1 { margin: 0; font-size: 13mm; line-height: 1.1; }
+  h2 { margin: 2mm 0 0; font-size: 8mm; color: #2E75B6; font-weight: 700; }
+  .qr { margin: 8mm auto 6mm; width: 112mm; padding: 6mm; background: #fff; border: 2.5mm solid #FFB703; border-radius: 8mm; }
+  .qr img { width: 100%; display: block; }
+  .steps { display: flex; gap: 4mm; justify-content: center; margin-bottom: 6mm; }
+  .step { flex: 1; background: #fff; border-radius: 4mm; padding: 3.5mm 2mm; font-size: 4.3mm; line-height: 1.3; }
+  .step b { display: block; margin: 0 auto 1.5mm; width: 9mm; height: 9mm; line-height: 9mm; border-radius: 50%; background: #2EC4B6; color: #fff; font-size: 5mm; }
+  .step i { color: #2E75B6; font-style: normal; }
+  .code { display: flex; align-items: center; justify-content: center; gap: 4mm; font-size: 6mm; font-weight: 700; margin-bottom: 5mm; }
+  .code .box { width: 42mm; height: 14mm; border: 0.8mm dashed #1F3864; border-radius: 3mm; background: #fff; }
+  footer { background: #2EC4B6; color: #08332F; padding: 5mm 14mm; display: flex; justify-content: space-between; font-size: 4.2mm; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <img src="../assets/logo.png" alt="">
+    <div><div class="brand">NaikTaraf<span>.AI</span></div><div class="tag">Jurulatih kerjaya anda · Your career coach</div></div>
+  </header>
+  <main>
+    <h1>Imbas untuk mula belajar</h1>
+    <h2>Scan to start learning</h2>
+    <div class="qr"><img src="qr-code.png" alt="QR code"></div>
+    <div class="code">Kod peserta / Participant code: <span class="box"></span></div>
+    <div class="steps">
+      <div class="step"><b>1</b>Buka kamera telefon<br><i>Open your phone camera</i></div>
+      <div class="step"><b>2</b>Halakan ke kod QR<br><i>Point it at the QR code</i></div>
+      <div class="step"><b>3</b>Tekan pautan yang muncul<br><i>Tap the link that appears</i></div>
+    </div>
+  </main>
+  <footer><span>Tiada muat turun · Tiada log masuk</span><span>No download · No login</span><span>~10 minit / minutes</span></footer>
+</div>
+</body>
+</html>
