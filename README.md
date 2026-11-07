@@ -17,6 +17,7 @@ one link: no app download and no login.
 | `CLAUDE.md` | The project brief | Team |
 | `assets/lessons/lesson1.mp4` … `lesson3.mp4` | The 3 lesson videos (made from the Canva lessons). They play inside the chat. To replace one, upload a new MP4 with the same name | Team |
 | `print/qr-poster-A4.pdf`, `print/qr-code.png` / `.svg` | QR code that opens the chatbot, and a printable A4 poster with a box to write each worker's participant code | Team |
+| `forms/create-hr-dashboard.gs` | One-click builder that adds a private, auto-updating **HR Dashboard** tab to the Responses Sheet (headline numbers, before/after by role, knowledge gaps, participant list for badge checks) | Run once |
 | `forms/create-google-form.gs` | One-click builder for the Pre/Post Skills Check Google Form (10 questions, BM/English, answers go to a Google Sheet) | Run once |
 
 ## How the chatbot works (for workers)
@@ -67,3 +68,9 @@ On GitHub, go to **Settings → Pages**. Under "Build and deployment", choose **
 ## Privacy
 
 The app only asks for a participant code (P01–P99). Progress is saved only in the worker's own phone browser. The check-in answers reach your team only through the pre-filled Google Form.
+
+## HR Dashboard (private)
+
+The **HR Dashboard** tab lives inside the "NaikTaraf.AI – Responses" Google Sheet. Run `forms/create-hr-dashboard.gs` once (steps are in the Google Doc "NaikTaraf.AI – HR Dashboard Builder"). After that it refreshes itself whenever a worker submits answers.
+
+To give HR access, click **Share** in the Sheet, add their email and choose **Viewer**. It shows participant codes only, and HR matches codes to staff using their own private list. Test codes listed in `EXCLUDE_CODES` (e.g. P99) are left out.
