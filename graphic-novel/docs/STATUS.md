@@ -16,10 +16,13 @@
 - [ ] Auth (decision needed: email magic link vs. provider)
 - [ ] FastAPI worker skeleton + `run_stage(book_id, stage, version)`
 
+## Decisions
+- Image generator: GPT Image 2.5 via Higgsfield (built behind the swappable `ImageProvider` interface). Still to confirm: that its API accepts reference images and fixed seeds.
+
 ## Open decisions
-- Image provider vendor (must support reference images + seeds)
 - Hosting for Postgres / Redis / S3
 - Auth method
 
 ## Log
+- 2026-11-13: Image generator chosen: GPT Image 2.5 on Higgsfield.
 - 2026-11-13: Project scaffolded; milestone 1 schemas and data model done.
