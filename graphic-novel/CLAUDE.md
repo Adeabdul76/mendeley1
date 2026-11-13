@@ -193,7 +193,7 @@ Keep all LLM and image prompts as versioned files in `/apps/worker/prompts/` (no
 
 - `outline.md`, `script.md`, `character_sheet.md`, `panel_image.md`, `qa_vision.md`, `moderation.md`, `cover.md`
 - Every prompt asks for **strict JSON** that matches a schema in `/packages/schemas`; validate the response and retry once with the validation error appended.
-- Temperature: outline 0.8, script 0.7, QA 0.
+- Creativity/depth is set with `effort` (outline high, script medium, QA high). The current Claude API no longer accepts `temperature`, so do not send it.
 
 ---
 

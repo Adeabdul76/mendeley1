@@ -14,3 +14,16 @@ git subtree split --prefix=graphic-novel -b graphic-novel-only
 pip install -r apps/worker/requirements.txt
 python -m pytest apps/worker -q
 ```
+
+## Make a storyboard
+
+```bash
+# practice mode: no AI, no cost
+python -m apps.worker.cli storyboard --fixture fixtures/family_adventure.json --out out --practice
+
+# real mode: set your key first
+export ANTHROPIC_API_KEY=...
+python -m apps.worker.cli storyboard --fixture fixtures/family_adventure.json --out out
+```
+
+Then open `out/storyboard.html`.

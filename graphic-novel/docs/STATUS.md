@@ -1,6 +1,6 @@
 # Status
 
-**Current milestone:** 1 — Schemas + DB + storage + auth (in progress)
+**Current milestone:** 2 — Text-only pipeline (brief → outline → script → storyboard), code done; waiting on a first real run. Milestone 1 infrastructure items still open below.
 
 ## Milestone 1
 - [x] Repository layout (§3)
@@ -16,6 +16,16 @@
 - [ ] Auth (decision needed: email magic link vs. provider)
 - [ ] FastAPI worker skeleton + `run_stage(book_id, stage, version)`
 
+## Milestone 2
+- [x] Outline prompt + stage (`claude-opus-5-5`, effort high) with page-coverage and character-appearance checks
+- [x] Page script prompt + stage (`claude-sonnet-5-5`, effort medium), one call per story page (pages 3–31), layout/panel-id/speaker checks
+- [x] Structured JSON output, full validation, one retry with errors appended; server-side refusal fallback on
+- [x] Practice mode (no AI, no cost) for testing
+- [x] HTML storyboard: `python -m apps.worker.cli storyboard --fixture fixtures/family_adventure.json --out out`
+- [x] Tests (28 passing), including a fake-Claude retry test
+- [ ] First real run with an Anthropic API key (needs a place where the key can be set — see below)
+- [ ] Storyboard screen in the web app
+
 ## Decisions
 - Image generator: GPT Image 2.5 via Higgsfield (built behind the swappable `ImageProvider` interface). Still to confirm: that its API accepts reference images and fixed seeds.
 
@@ -24,5 +34,6 @@
 - Auth method
 
 ## Log
+- 2026-11-13: Milestone 2 code done; tested in practice mode only. Real run pending: this cloud session can't hold an Anthropic key.
 - 2026-11-13: Image generator chosen: GPT Image 2.5 on Higgsfield.
 - 2026-11-13: Project scaffolded; milestone 1 schemas and data model done.
