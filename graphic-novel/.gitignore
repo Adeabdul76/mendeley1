@@ -5,3 +5,6 @@ __pycache__/
 .pytest_cache/
 .venv/
 out/
+
+# Real customer/family briefs: never commit
+briefs/

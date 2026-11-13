@@ -152,3 +152,17 @@ def test_bad_shape_gets_retry_not_crash() -> None:
     client, calls = fake_client([FakeStream(json.dumps(bad)), FakeStream(json.dumps(good))])
     assert run_outline(b, client) == good
     assert len(calls) == 2
+
+
+def test_new_brief_does_not_reuse_old_outline(tmp_path: Path, capsys) -> None:
+    fixture = FIXTURES / "family_adventure.json"
+    assert main(["storyboard", "--fixture", str(fixture), "--out", str(tmp_path), "--practice"]) == 0
+    other = json.loads(fixture.read_text())
+    other["brief"]["summary"] = "A completely different story about a picnic in the park."
+    other_file = tmp_path / "other.json"
+    other_file.write_text(json.dumps(other))
+    capsys.readouterr()
+    assert main(["storyboard", "--fixture", str(other_file), "--out", str(tmp_path), "--practice"]) == 0
+    printed = capsys.readouterr().out
+    assert "starting fresh" in printed
+    assert "Reusing" not in printed

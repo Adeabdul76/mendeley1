@@ -34,10 +34,15 @@ def storyboard(args: argparse.Namespace) -> int:
 
     out = Path(args.out)
     page_dir = out / "pages"
-    if args.fresh:
+    brief_file = out / "brief.json"
+    brief_changed = brief_file.exists() and json.loads(brief_file.read_text(encoding="utf-8")) != brief
+    if brief_changed:
+        print("This is a different brief from the last run in this folder, so starting fresh.")
+    if args.fresh or brief_changed:
         for f in [out / "outline.json", *page_dir.glob("p*.json")]:
             f.unlink(missing_ok=True)
     page_dir.mkdir(parents=True, exist_ok=True)
+    brief_file.write_text(json.dumps(brief, ensure_ascii=False, indent=2), encoding="utf-8")
 
     def save_page(page: dict) -> None:
         (page_dir / f"p{page['page']:02d}.json").write_text(json.dumps(page, ensure_ascii=False, indent=2), encoding="utf-8")
