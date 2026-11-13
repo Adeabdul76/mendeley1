@@ -89,6 +89,16 @@ def check_outline_rules(outline: dict[str, Any], brief: dict[str, Any]) -> list[
     return problems
 
 
+def fix_outline(outline: Any) -> Any:
+    """Accept a one-page beat written as [5] and store it as [5, 5]."""
+    if isinstance(outline, dict):
+        for beat in outline.get("beats", []):
+            pr = beat.get("page_range") if isinstance(beat, dict) else None
+            if isinstance(pr, list) and len(pr) == 1:
+                beat["page_range"] = [pr[0], pr[0]]
+    return outline
+
+
 def beat_for_page(outline: dict[str, Any], page: int) -> dict[str, Any]:
     for beat in outline["beats"]:
         if beat["page_range"][0] <= page <= beat["page_range"][1]:
@@ -147,6 +157,7 @@ def run_outline(brief: dict[str, Any], llm: LLMClient) -> dict[str, Any]:
     return llm.json_call(
         stage="outline", model=OUTLINE_MODEL, system=SYSTEM, prompt=prompt,
         schema="outline", effort="high", extra_check=lambda o: check_outline_rules(o, brief),
+        fix=fix_outline,
     )
 
 

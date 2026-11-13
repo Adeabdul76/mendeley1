@@ -131,3 +131,24 @@ def test_long_pose_now_allowed() -> None:
     page = json.loads((FIXTURES / "page_sample.json").read_text())
     page["panels"][0]["characters"][0]["pose"] = "holding the upside-down map close, tilting her head, glasses slightly low on her nose"
     assert schema_errors("page", page) == []
+
+
+def test_one_number_page_range_is_accepted() -> None:
+    b = brief()
+    outline = make_responder(b)("outline", "")
+    # Make beat 0 a single page written as [3], shifting the next beat to start at 4.
+    outline["beats"][0]["page_range"] = [3]
+    outline["beats"].insert(1, dict(outline["beats"][0], page_range=[4]))
+    client, _ = fake_client([FakeStream(json.dumps(outline))])
+    result = run_outline(b, client)
+    assert result["beats"][0]["page_range"] == [3, 3]
+
+
+def test_bad_shape_gets_retry_not_crash() -> None:
+    b = brief()
+    good = make_responder(b)("outline", "")
+    bad = json.loads(json.dumps(good))
+    bad["beats"][0]["page_range"] = [3, 4, 5]  # wrong shape: must not crash our own checks
+    client, calls = fake_client([FakeStream(json.dumps(bad)), FakeStream(json.dumps(good))])
+    assert run_outline(b, client) == good
+    assert len(calls) == 2

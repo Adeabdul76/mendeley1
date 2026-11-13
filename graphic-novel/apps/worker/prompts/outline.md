@@ -24,6 +24,6 @@ $brief
 JSON with:
 - `title`: short, catchy, original (max 8 words).
 - `logline`: one sentence.
-- `beats`: in page order, covering every page from 3 to $ending_page exactly once with no gaps or overlaps. Each beat has `act` (1, 2 or 3), `page_range` [first, last] (1–3 pages per beat), `summary` (what happens, 1–3 sentences), `emotion` (one or two words), and `characters` (ids of who appears).
+- `beats`: in page order, covering every page from 3 to $ending_page exactly once with no gaps or overlaps. Each beat has `act` (1, 2 or 3), `page_range` [first, last], always two numbers, so a one-page beat is [5, 5] (1–3 pages per beat), `summary` (what happens, 1–3 sentences), `emotion` (one or two words), and `characters` (ids of who appears).
 
 Make sure every character appears in at least 3 beats and the main character appears in most beats. Weave in each inside joke at least once, and pay off at least one of them in Act 3.

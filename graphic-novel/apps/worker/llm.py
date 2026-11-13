@@ -91,11 +91,20 @@ def api_schema(name: str) -> dict[str, Any]:
 Checker = Callable[[Any], list[str]]
 
 
+def find_problems(schema: str, data: Any, extra_check: Checker | None) -> list[str]:
+    """Schema errors first; our own rules only once the shape is right."""
+    problems = schema_errors(schema, data)
+    if not problems and extra_check:
+        problems = extra_check(data)
+    return problems
+
+
 class LLMClient(Protocol):
     usage: Usage
 
     def json_call(self, *, stage: str, model: str, system: str, prompt: str,
-                  schema: str, effort: str, extra_check: Checker | None = None) -> Any: ...
+                  schema: str, effort: str, extra_check: Checker | None = None,
+                  fix: Callable[[Any], Any] | None = None) -> Any: ...
 
 
 class ClaudeClient:
@@ -128,11 +137,14 @@ class ClaudeClient:
         return json.loads(text)
 
     def json_call(self, *, stage: str, model: str, system: str, prompt: str,
-                  schema: str, effort: str, extra_check: Checker | None = None) -> Any:
+                  schema: str, effort: str, extra_check: Checker | None = None,
+                  fix: Callable[[Any], Any] | None = None) -> Any:
         messages: list[dict[str, Any]] = [{"role": "user", "content": prompt}]
         for attempt in range(2):
             data = self._once(model, system, messages, schema, effort)
-            problems = schema_errors(schema, data) + (extra_check(data) if extra_check else [])
+            if fix:
+                data = fix(data)
+            problems = find_problems(schema, data, extra_check)
             if not problems:
                 return data
             if attempt == 0:
@@ -152,10 +164,13 @@ class PracticeClient:
         self.usage = Usage()
 
     def json_call(self, *, stage: str, model: str, system: str, prompt: str,
-                  schema: str, effort: str, extra_check: Checker | None = None) -> Any:
+                  schema: str, effort: str, extra_check: Checker | None = None,
+                  fix: Callable[[Any], Any] | None = None) -> Any:
         data = self._respond(stage, prompt)
+        if fix:
+            data = fix(data)
         self.usage.add(f"practice:{model}", 0, 0)
-        problems = schema_errors(schema, data) + (extra_check(data) if extra_check else [])
+        problems = find_problems(schema, data, extra_check)
         if problems:
             raise LLMError(f"practice {stage} invalid: {problems}")
         return data

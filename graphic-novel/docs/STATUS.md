@@ -22,7 +22,7 @@
 - [x] Structured JSON output, full validation, one retry with errors appended; server-side refusal fallback on
 - [x] Practice mode (no AI, no cost) for testing
 - [x] HTML storyboard: `python -m apps.worker.cli storyboard --fixture fixtures/family_adventure.json --out out`
-- [x] Tests (30 passing), including a fake-Claude retry test
+- [x] Tests (32 passing), including a fake-Claude retry test
 - [ ] First real run with an Anthropic API key (needs a place where the key can be set — see below)
 - [ ] Storyboard screen in the web app
 
@@ -34,6 +34,7 @@
 - Auth method
 
 ## Log
+- 2026-11-14: Second real run crashed in our own outline checks when Claude wrote a one-page beat as [5]. Now normalised to [5, 5]; our rule checks run only after the schema passes, so a wrong shape triggers the retry instead of a crash.
 - 2026-11-14: First real run stopped on page scripts: a character pose was longer than the 60-character limit. Loosened art-direction length limits; finished outline/pages are now saved and reused on rerun (`--fresh` to start over).
 - 2026-11-13: Milestone 2 code done; tested in practice mode only. Real run pending: this cloud session can't hold an Anthropic key.
 - 2026-11-13: Image generator chosen: GPT Image 2.5 on Higgsfield.
