@@ -107,3 +107,27 @@ def test_claude_client_needs_key(monkeypatch) -> None:
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     with pytest.raises(LLMError, match="ANTHROPIC_API_KEY"):
         ClaudeClient()
+
+
+def test_rerun_reuses_saved_work(tmp_path: Path) -> None:
+    fixture = str(FIXTURES / "family_adventure.json")
+    assert main(["storyboard", "--fixture", fixture, "--out", str(tmp_path), "--practice"]) == 0
+    # Drop five pages, as if the first run had stopped part-way.
+    for n in range(27, 32):
+        (tmp_path / "pages" / f"p{n:02d}.json").unlink()
+    b = json.loads(Path(fixture).read_text())
+    calls: list[str] = []
+    responder = make_responder(b)
+    client = PracticeClient(lambda stage, prompt: (calls.append(stage), responder(stage, prompt))[1])
+    outline = json.loads((tmp_path / "outline.json").read_text())
+    saved = {json.loads(f.read_text())["page"]: json.loads(f.read_text()) for f in (tmp_path / "pages").glob("p*.json")}
+    pages = run_script(b, outline, client, done=saved)
+    assert len(pages) == 29
+    assert calls == [f"script p{n}" for n in range(27, 32)]
+
+
+def test_long_pose_now_allowed() -> None:
+    from apps.worker.validation import schema_errors
+    page = json.loads((FIXTURES / "page_sample.json").read_text())
+    page["panels"][0]["characters"][0]["pose"] = "holding the upside-down map close, tilting her head, glasses slightly low on her nose"
+    assert schema_errors("page", page) == []

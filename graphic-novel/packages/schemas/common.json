@@ -3,13 +3,48 @@
   "$id": "common.json",
   "title": "Shared definitions",
   "$defs": {
-    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$" },
-    "bookType": {
-      "enum": ["adventure", "love_story", "family", "birthday", "graduation", "islamic_values", "custom"]
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"
     },
-    "ageGroup": { "enum": ["baby", "child", "teen", "adult", "senior", "pet"] },
-    "language": { "enum": ["en", "ms"] },
-    "trimSize": { "enum": ["letter_8.5x11", "us_comic_6.625x10.25", "a4"] },
-    "emotion": { "type": "string", "minLength": 1, "maxLength": 40 }
+    "bookType": {
+      "enum": [
+        "adventure",
+        "love_story",
+        "family",
+        "birthday",
+        "graduation",
+        "islamic_values",
+        "custom"
+      ]
+    },
+    "ageGroup": {
+      "enum": [
+        "baby",
+        "child",
+        "teen",
+        "adult",
+        "senior",
+        "pet"
+      ]
+    },
+    "language": {
+      "enum": [
+        "en",
+        "ms"
+      ]
+    },
+    "trimSize": {
+      "enum": [
+        "letter_8.5x11",
+        "us_comic_6.625x10.25",
+        "a4"
+      ]
+    },
+    "emotion": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    }
   }
 }

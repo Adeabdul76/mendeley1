@@ -151,13 +151,23 @@ def run_outline(brief: dict[str, Any], llm: LLMClient) -> dict[str, Any]:
 
 
 def run_script(brief: dict[str, Any], outline: dict[str, Any], llm: LLMClient,
-               on_page: Callable[[int, int], None] | None = None) -> list[dict[str, Any]]:
+               on_page: Callable[[int, int], None] | None = None,
+               done: dict[int, dict[str, Any]] | None = None,
+               save: Callable[[dict[str, Any]], None] | None = None) -> list[dict[str, Any]]:
+    """Script every story page. Pages already in `done` are reused (no AI call);
+    each new page is passed to `save` as soon as it is written."""
     known = {c["id"] for c in brief["characters"]}
+    done = done or {}
     pages: list[dict[str, Any]] = []
     todo = list(story_pages(brief.get("page_count", 32)))
     outline_text = json.dumps(outline["beats"], ensure_ascii=False, indent=1)
     layouts_text = "\n".join(f"- {k}: {v}" for k, v in LAYOUTS.items())
     for i, page in enumerate(todo, start=1):
+        if page in done:
+            pages.append(done[page])
+            if on_page:
+                on_page(i, len(todo))
+            continue
         prompt = _prompt(
             "script",
             language=LANGUAGE_NAMES[brief["language"]],
@@ -174,6 +184,8 @@ def run_script(brief: dict[str, Any], outline: dict[str, Any], llm: LLMClient,
             schema="page", effort="medium", extra_check=page_checker(page, known),
         )
         pages.append(data)
+        if save:
+            save(data)
         if on_page:
             on_page(i, len(todo))
     return pages

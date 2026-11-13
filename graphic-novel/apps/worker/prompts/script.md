@@ -33,4 +33,6 @@ $previous
 ## Your page
 Page $page. Beat for this page: $beat
 
+Keep `pose` and `expression` to a short phrase each (under 15 words); put longer detail in `action`.
+
 Return JSON for page $page: `page`, `layout`, and `panels`. Panel ids are "p$page-1", "p$page-2", … in reading order. Each panel has `shot` (e.g. "wide establishing", "medium", "close-up", "over-the-shoulder"), `setting`, `characters` (id, pose, expression), `action`, `dialogue` (speaker id, text, type: speech/thought/shout/whisper), `caption`, `sfx`.

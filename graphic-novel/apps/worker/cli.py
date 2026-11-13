@@ -32,21 +32,46 @@ def storyboard(args: argparse.Namespace) -> int:
         print("No ANTHROPIC_API_KEY found, so running in practice mode (no AI, no cost).")
     llm = PracticeClient(make_responder(brief)) if practice else ClaudeClient()
 
+    out = Path(args.out)
+    page_dir = out / "pages"
+    if args.fresh:
+        for f in [out / "outline.json", *page_dir.glob("p*.json")]:
+            f.unlink(missing_ok=True)
+    page_dir.mkdir(parents=True, exist_ok=True)
+
+    def save_page(page: dict) -> None:
+        (page_dir / f"p{page['page']:02d}.json").write_text(json.dumps(page, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    def load_saved() -> dict[int, dict]:
+        saved = {}
+        for f in page_dir.glob("p*.json"):
+            data = json.loads(f.read_text(encoding="utf-8"))
+            if not schema_errors("page", data):
+                saved[data["page"]] = data
+        return saved
+
     try:
-        print("Writing the outline…")
-        outline = run_outline(brief, llm)
-        print(f"  “{outline['title']}”, {len(outline['beats'])} beats")
+        outline_file = out / "outline.json"
+        if outline_file.exists() and not schema_errors("outline", json.loads(outline_file.read_text(encoding="utf-8"))):
+            outline = json.loads(outline_file.read_text(encoding="utf-8"))
+            print(f"Reusing saved outline: “{outline['title']}” (use --fresh to start over)")
+        else:
+            print("Writing the outline… (this can take 1–3 minutes)")
+            outline = run_outline(brief, llm)
+            outline_file.write_text(json.dumps(outline, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"  “{outline['title']}”, {len(outline['beats'])} beats")
+        saved = load_saved()
+        if saved:
+            print(f"Reusing {len(saved)} saved pages.")
         print("Writing page scripts…")
-        pages = run_script(brief, outline, llm, on_page=lambda i, n: print(f"  page {i}/{n}", end="\r", flush=True))
-        print()
+        pages = run_script(brief, outline, llm, done=saved, save=save_page,
+                           on_page=lambda i, n: print(f"  page {i}/{n}", flush=True))
     except LLMError as e:
-        print(f"Stopped: {e}")
+        print(f"\nStopped: {e}")
+        print("Finished work is saved. Run the same command again to continue from here.")
         return 1
 
     warnings = check_book_rules(pages, brief)
-    out = Path(args.out)
-    out.mkdir(parents=True, exist_ok=True)
-    (out / "outline.json").write_text(json.dumps(outline, ensure_ascii=False, indent=2), encoding="utf-8")
     (out / "pages.json").write_text(json.dumps(pages, ensure_ascii=False, indent=2), encoding="utf-8")
     (out / "storyboard.html").write_text(render(brief, outline, pages, warnings, practice), encoding="utf-8")
 
@@ -65,6 +90,7 @@ def main(argv: list[str] | None = None) -> int:
     sb.add_argument("--fixture", required=True)
     sb.add_argument("--out", default="out")
     sb.add_argument("--practice", action="store_true", help="no AI calls; placeholder text")
+    sb.add_argument("--fresh", action="store_true", help="ignore saved outline/pages and start over")
     args = parser.parse_args(argv)
     return storyboard(args)
 

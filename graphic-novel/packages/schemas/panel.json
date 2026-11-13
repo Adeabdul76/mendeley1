@@ -4,40 +4,105 @@
   "title": "PanelScript",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "shot", "setting", "characters", "action", "dialogue", "caption", "sfx"],
+  "required": [
+    "id",
+    "shot",
+    "setting",
+    "characters",
+    "action",
+    "dialogue",
+    "caption",
+    "sfx"
+  ],
   "properties": {
-    "id": { "type": "string", "pattern": "^p[0-9]+-[1-6]$" },
-    "shot": { "type": "string", "minLength": 2, "maxLength": 60 },
-    "setting": { "type": "string", "minLength": 2, "maxLength": 200 },
+    "id": {
+      "type": "string",
+      "pattern": "^p[0-9]+-[1-6]$"
+    },
+    "shot": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "setting": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 500
+    },
     "characters": {
-      "type": "array", "maxItems": 6,
+      "type": "array",
+      "maxItems": 6,
       "description": "Exactly which characters are visible. Drives the image prompt and the QA count check.",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
-          "id": { "$ref": "common.json#/$defs/id" },
-          "pose": { "type": "string", "maxLength": 60 },
-          "expression": { "type": "string", "maxLength": 40 }
+          "id": {
+            "$ref": "common.json#/$defs/id"
+          },
+          "pose": {
+            "type": "string",
+            "maxLength": 250
+          },
+          "expression": {
+            "type": "string",
+            "maxLength": 120
+          }
         }
       }
     },
-    "action": { "type": "string", "minLength": 2, "maxLength": 300 },
+    "action": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 800
+    },
     "dialogue": {
-      "type": "array", "maxItems": 8,
+      "type": "array",
+      "maxItems": 8,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["speaker", "text", "type"],
+        "required": [
+          "speaker",
+          "text",
+          "type"
+        ],
         "properties": {
-          "speaker": { "$ref": "common.json#/$defs/id" },
-          "text": { "type": "string", "minLength": 1, "maxLength": 200 },
-          "type": { "enum": ["speech", "thought", "shout", "whisper"] }
+          "speaker": {
+            "$ref": "common.json#/$defs/id"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "type": {
+            "enum": [
+              "speech",
+              "thought",
+              "shout",
+              "whisper"
+            ]
+          }
         }
       }
     },
-    "caption": { "type": ["string", "null"], "maxLength": 200 },
-    "sfx": { "type": ["string", "null"], "maxLength": 30 }
+    "caption": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 300
+    },
+    "sfx": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 40
+    }
   }
 }
