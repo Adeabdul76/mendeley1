@@ -1,0 +1,238 @@
+// Core data model (CLAUDE.md §6). Single source of truth for the DB.
+// Python worker mirrors these tables with SQLAlchemy; migrations live in /db/migrations.
+// Soft-delete everywhere via deleted_at; a nightly job hard-deletes photos/refs after retention.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BookType {
+  adventure
+  love_story
+  family
+  birthday
+  graduation
+  islamic_values
+  custom
+}
+
+enum BookStatus {
+  draft
+  generating
+  in_review
+  paused
+  approved
+  exported
+  fulfilled
+}
+
+enum PanelTakeStatus {
+  pending
+  qa_passed
+  qa_failed
+  flagged
+}
+
+model User {
+  id         String    @id @default(uuid()) @db.Uuid
+  email      String    @unique
+  created_at DateTime  @default(now())
+  deleted_at DateTime?
+  orders     Order[]
+  books      Book[]
+}
+
+model Order {
+  id                 String    @id @default(uuid()) @db.Uuid
+  user_id            String    @db.Uuid
+  user               User      @relation(fields: [user_id], references: [id])
+  stripe_session_id  String?   @unique
+  status             String    @default("pending")
+  completed_at       DateTime?
+  retention_until    DateTime? // photos + embeddings hard-deleted after this
+  created_at         DateTime  @default(now())
+  deleted_at         DateTime?
+  books              Book[]
+  consents           Consent[]
+}
+
+model Book {
+  id                 String           @id @default(uuid()) @db.Uuid
+  user_id            String           @db.Uuid
+  user               User             @relation(fields: [user_id], references: [id])
+  order_id           String?          @db.Uuid
+  order              Order?           @relation(fields: [order_id], references: [id])
+  book_type          BookType
+  language           String           @default("en")
+  trim_size          String           @default("letter_8.5x11")
+  page_count         Int              @default(32)
+  status             BookStatus       @default(draft)
+  production_paused  Boolean          @default(true)
+  brief              Json             // validated against packages/schemas/brief.json
+  free_regens_left   Int              @default(20)
+  cost_budget_cents  Int              @default(0)
+  created_at         DateTime         @default(now())
+  deleted_at         DateTime?
+  characters         Character[]
+  outlines           Outline[]
+  pages              Page[]
+  credits            CreditsLedger[]
+  costs              CostLedger[]
+  exports            Export[]
+}
+
+model Character {
+  id           String           @id @default(uuid()) @db.Uuid
+  book_id      String           @db.Uuid
+  book         Book             @relation(fields: [book_id], references: [id])
+  slug         String           // matches schema "id", e.g. "aisha"
+  name         String
+  role         String
+  age_group    String
+  is_main      Boolean          @default(false)
+  data         Json             // validated against character.json
+  created_at   DateTime         @default(now())
+  deleted_at   DateTime?
+  refs         CharacterRef[]
+  sheets       CharacterSheet[]
+
+  @@unique([book_id, slug])
+}
+
+model CharacterRef {
+  id            String    @id @default(uuid()) @db.Uuid
+  character_id  String    @db.Uuid
+  character     Character @relation(fields: [character_id], references: [id])
+  storage_key   String    // uploads/...
+  width         Int
+  height        Int
+  face_detected Boolean   @default(false)
+  created_at    DateTime  @default(now())
+  deleted_at    DateTime?
+}
+
+model CharacterSheet {
+  id           String    @id @default(uuid()) @db.Uuid
+  character_id String    @db.Uuid
+  character    Character @relation(fields: [character_id], references: [id])
+  version      Int
+  data         Json      // validated against character_sheet.json
+  approved_at  DateTime?
+  created_at   DateTime  @default(now())
+  deleted_at   DateTime?
+
+  @@unique([character_id, version])
+}
+
+model Outline {
+  id         String    @id @default(uuid()) @db.Uuid
+  book_id    String    @db.Uuid
+  book       Book      @relation(fields: [book_id], references: [id])
+  version    Int
+  data       Json      // validated against outline.json
+  created_at DateTime  @default(now())
+  deleted_at DateTime?
+
+  @@unique([book_id, version])
+}
+
+model Page {
+  id          String    @id @default(uuid()) @db.Uuid
+  book_id     String    @db.Uuid
+  book        Book      @relation(fields: [book_id], references: [id])
+  number      Int
+  version     Int
+  kind        String    @default("story") // cover | title | dedication | story | ending | notes | back_cover
+  script      Json      // validated against page.json
+  render_key  String?   // pages/...
+  created_at  DateTime  @default(now())
+  deleted_at  DateTime?
+  panels      Panel[]
+
+  @@unique([book_id, number, version])
+}
+
+model Panel {
+  id         String      @id @default(uuid()) @db.Uuid
+  page_id    String      @db.Uuid
+  page       Page        @relation(fields: [page_id], references: [id])
+  slug       String      // e.g. "p7-1"
+  script     Json        // validated against panel.json
+  created_at DateTime    @default(now())
+  deleted_at DateTime?
+  takes      PanelTake[]
+}
+
+model PanelTake {
+  id            String          @id @default(uuid()) @db.Uuid
+  panel_id      String          @db.Uuid
+  panel         Panel           @relation(fields: [panel_id], references: [id])
+  provider      String
+  model         String
+  seed          BigInt
+  prompt        String
+  refs          Json            // list of storage keys used as conditioning
+  storage_key   String?         // panels/...
+  status        PanelTakeStatus @default(pending)
+  is_selected   Boolean         @default(false)
+  auto_retry    Int             @default(0) // 0..3
+  charged       Boolean         @default(false) // never true for QA-failure regenerations
+  created_at    DateTime        @default(now())
+  deleted_at    DateTime?
+  qa_results    QaResult[]
+}
+
+model QaResult {
+  id         String    @id @default(uuid()) @db.Uuid
+  take_id    String    @db.Uuid
+  take       PanelTake @relation(fields: [take_id], references: [id])
+  passed     Boolean
+  data       Json      // validated against qa_result.json
+  created_at DateTime  @default(now())
+}
+
+model CreditsLedger {
+  id         String   @id @default(uuid()) @db.Uuid
+  book_id    String   @db.Uuid
+  book       Book     @relation(fields: [book_id], references: [id])
+  delta      Int      // +N purchase/grant, -1 regeneration
+  reason     String
+  take_id    String?  @db.Uuid
+  created_at DateTime @default(now())
+}
+
+model CostLedger {
+  id           String   @id @default(uuid()) @db.Uuid
+  book_id      String   @db.Uuid
+  book         Book     @relation(fields: [book_id], references: [id])
+  stage        String
+  kind         String   // llm_tokens | image_call
+  units        Int
+  cost_cents   Int
+  created_at   DateTime @default(now())
+}
+
+model Consent {
+  id                  String   @id @default(uuid()) @db.Uuid
+  order_id            String   @db.Uuid
+  order               Order    @relation(fields: [order_id], references: [id])
+  photos_permission   Boolean
+  text_shown          String   // exact wording the customer agreed to
+  ip_hash             String?
+  created_at          DateTime @default(now())
+}
+
+model Export {
+  id          String   @id @default(uuid()) @db.Uuid
+  book_id     String   @db.Uuid
+  book        Book     @relation(fields: [book_id], references: [id])
+  kind        String   // print_pdf | web_flipbook
+  storage_key String   // exports/...
+  preflight   Json?
+  created_at  DateTime @default(now())
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "character.json",
+  "title": "Character",
+  "description": "A character as entered by the customer. Only describe what they state or what is visible in photos.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "role", "age_group"],
+  "properties": {
+    "id": { "$ref": "common.json#/$defs/id" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 60 },
+    "role": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "age_group": { "$ref": "common.json#/$defs/ageGroup" },
+    "is_main": { "type": "boolean", "default": false },
+    "traits": { "type": "array", "maxItems": 6, "items": { "type": "string", "maxLength": 40 } },
+    "describe_only": { "type": "boolean", "default": false },
+    "customer_description": { "type": "string", "maxLength": 600 },
+    "photo_ids": {
+      "type": "array", "maxItems": 5,
+      "items": { "type": "string", "format": "uuid" }
+    }
+  },
+  "if": { "properties": { "describe_only": { "const": false } } },
+  "then": { "properties": { "photo_ids": { "minItems": 2 } }, "required": ["photo_ids"] },
+  "else": { "required": ["customer_description"] }
+}

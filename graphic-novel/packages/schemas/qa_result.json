@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "qa_result.json",
+  "title": "PanelQAResult",
+  "description": "Stage [6] vision QA output for one panel take.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["character_count_ok", "identities_ok", "duplicate_character", "anatomy_ok", "extra_text_found", "matches_action", "safe", "notes"],
+  "properties": {
+    "character_count_ok": { "type": "boolean" },
+    "identities_ok": { "type": "boolean" },
+    "duplicate_character": { "type": "boolean" },
+    "anatomy_ok": { "type": "boolean" },
+    "extra_text_found": { "type": "boolean" },
+    "matches_action": { "type": "boolean" },
+    "safe": { "type": "boolean" },
+    "notes": { "type": "string", "maxLength": 1000 },
+    "face_boxes": {
+      "type": "array",
+      "description": "Normalised [x, y, w, h] in 0..1, used by the lettering engine for tails and no-go zones.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["character_id", "box"],
+        "properties": {
+          "character_id": { "$ref": "common.json#/$defs/id" },
+          "box": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number", "minimum": 0, "maximum": 1 } }
+        }
+      }
+    }
+  }
+}

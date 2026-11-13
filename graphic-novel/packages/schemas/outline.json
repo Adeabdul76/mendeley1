@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "outline.json",
+  "title": "StoryOutline",
+  "description": "Stage [3] output: 3-act outline.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "logline", "beats"],
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "logline": { "type": "string", "minLength": 10, "maxLength": 300 },
+    "beats": {
+      "type": "array", "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["page_range", "summary", "emotion"],
+        "properties": {
+          "act": { "enum": [1, 2, 3] },
+          "page_range": {
+            "type": "array", "minItems": 2, "maxItems": 2,
+            "items": { "type": "integer", "minimum": 1 }
+          },
+          "summary": { "type": "string", "minLength": 5, "maxLength": 600 },
+          "emotion": { "$ref": "common.json#/$defs/emotion" },
+          "characters": { "type": "array", "items": { "$ref": "common.json#/$defs/id" } }
+        }
+      }
+    }
+  }
+}

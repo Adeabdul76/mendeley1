@@ -1,0 +1,19 @@
+{
+  "page": 7,
+  "layout": "3-tier-5",
+  "panels": [
+    {
+      "id": "p7-1",
+      "shot": "wide establishing",
+      "setting": "rainforest trail, misty morning, giant ferns",
+      "characters": [
+        {"id": "nora", "pose": "holding map", "expression": "confident"},
+        {"id": "sami", "pose": "pointing", "expression": "excited"}
+      ],
+      "action": "Sami spots a sign half-hidden in the ferns",
+      "dialogue": [{"speaker": "sami", "text": "Mum! The waterfall is THAT way!", "type": "shout"}],
+      "caption": "Saturday, 8:47 am.",
+      "sfx": null
+    }
+  ]
+}

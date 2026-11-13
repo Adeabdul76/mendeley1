@@ -1,0 +1,45 @@
+{
+  "book_type": "family",
+  "language": "en",
+  "trim_size": "letter_8.5x11",
+  "page_count": 32,
+  "characters": [
+    {
+      "id": "nora",
+      "name": "Nora",
+      "role": "mum and expedition leader",
+      "age_group": "adult",
+      "is_main": true,
+      "traits": ["organised", "brave", "loves maps"],
+      "describe_only": true,
+      "customer_description": "Synthetic test character: woman in her 30s, warm brown skin, dark curly hair in a bun, round glasses, green raincoat."
+    },
+    {
+      "id": "sami",
+      "name": "Sami",
+      "role": "younger brother",
+      "age_group": "child",
+      "traits": ["curious", "snack-obsessed"],
+      "describe_only": true,
+      "customer_description": "Synthetic test character: boy about 7, short straight black hair, gap-toothed grin, yellow backpack."
+    },
+    {
+      "id": "biscuit",
+      "name": "Biscuit",
+      "role": "family dog",
+      "age_group": "pet",
+      "describe_only": true,
+      "customer_description": "Synthetic test character: small tan terrier, white chest patch, one floppy ear (left)."
+    }
+  ],
+  "brief": {
+    "summary": "The family goes on a weekend hike to find a legendary waterfall, but Biscuit keeps finding snacks instead.",
+    "occasion": "Family holiday keepsake",
+    "setting": "Rainforest trail and waterfall",
+    "tone": "warm and silly",
+    "inside_jokes": ["Sami always packs five sandwiches", "Nora's map is always upside down"],
+    "avoid": ["anything scary"]
+  },
+  "dedication": "For our little explorers.",
+  "consent": { "photos_permission_confirmed": true, "confirmed_at": "2026-11-13T00:00:00Z" }
+}

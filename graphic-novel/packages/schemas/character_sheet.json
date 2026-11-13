@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "character_sheet.json",
+  "title": "CharacterSheet",
+  "description": "Stage [2] output. Approved by the customer before any page is drawn.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["character_id", "version", "description", "reference_images", "approved"],
+  "properties": {
+    "character_id": { "$ref": "common.json#/$defs/id" },
+    "version": { "type": "integer", "minimum": 1 },
+    "description": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_text"],
+      "properties": {
+        "canonical_text": { "type": "string", "minLength": 20, "maxLength": 800 },
+        "age_look": { "type": "string", "maxLength": 60 },
+        "skin_tone": { "type": "string", "maxLength": 60 },
+        "hair": { "type": "string", "maxLength": 120 },
+        "facial_hair": { "type": ["string", "null"], "maxLength": 120 },
+        "eyewear": { "type": ["string", "null"], "maxLength": 120 },
+        "headwear": { "type": ["string", "null"], "maxLength": 120 },
+        "build": { "type": "string", "maxLength": 60 },
+        "signature_outfit": { "type": "string", "maxLength": 200 },
+        "accessories": { "type": "array", "items": { "type": "string", "maxLength": 80 } },
+        "markings": { "type": ["string", "null"], "maxLength": 200, "description": "Pets: exact markings, number of eyes/legs as seen." },
+        "mobility_aids": { "type": ["string", "null"], "maxLength": 120, "description": "Only if visible in photos or stated by the customer." }
+      }
+    },
+    "reference_images": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["front", "three_quarter", "side", "full_body"],
+      "properties": {
+        "front": { "$ref": "#/$defs/imageRef" },
+        "three_quarter": { "$ref": "#/$defs/imageRef" },
+        "side": { "$ref": "#/$defs/imageRef" },
+        "full_body": { "$ref": "#/$defs/imageRef" }
+      }
+    },
+    "approved": { "type": "boolean" },
+    "approved_at": { "type": ["string", "null"], "format": "date-time" }
+  },
+  "$defs": {
+    "imageRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["storage_key", "seed"],
+      "properties": {
+        "storage_key": { "type": "string", "pattern": "^refs/" },
+        "seed": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}
