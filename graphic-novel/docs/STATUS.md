@@ -26,6 +26,13 @@
 - [ ] First real run with an Anthropic API key (needs a place where the key can be set — see below)
 - [ ] Storyboard screen in the web app
 
+## Milestone 3 (character sheets)
+- [x] First real family book: 6 character sheets made with GPT Image 2.5 on Higgsfield (4-view turnaround, Warm Pop style), each from the family's photos, all approved by the customer. ~19 credits.
+- [x] Learned: GPT Image 2.5 on Higgsfield has no seed; consistency comes from passing the approved sheet as a reference image on every panel. A first sheet (the main character) is also passed as a style reference for the others.
+- [x] Real photos and sheet IDs kept out of git (`briefs/`, git-ignored).
+- [ ] Wrap this as code: `ImageProvider` interface + Higgsfield provider + sheet stage in the pipeline
+- [ ] Sheet approval screen in the web app
+
 ## Decisions
 - Image generator: GPT Image 2.5 via Higgsfield (built behind the swappable `ImageProvider` interface). Still to confirm: that its API accepts reference images and fixed seeds.
 
@@ -34,6 +41,7 @@
 - Auth method
 
 ## Log
+- 2026-11-14: Character sheets for the first family book generated and approved. Next: re-run the storyboard with final names, then a sample page.
 - 2026-11-14: Real brief folder `briefs/` is git-ignored (repo is public). A run now starts fresh when the brief in the output folder changes.
 - 2026-11-14: Second real run crashed in our own outline checks when Claude wrote a one-page beat as [5]. Now normalised to [5, 5]; our rule checks run only after the schema passes, so a wrong shape triggers the retry instead of a crash.
 - 2026-11-14: First real run stopped on page scripts: a character pose was longer than the 60-character limit. Loosened art-direction length limits; finished outline/pages are now saved and reused on rerun (`--fresh` to start over).
