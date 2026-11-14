@@ -33,6 +33,14 @@
 - [ ] Wrap this as code: `ImageProvider` interface + Higgsfield provider + sheet stage in the pipeline
 - [ ] Sheet approval screen in the web app
 
+## Milestones 4, 5 and 7: first complete book, made with prototype scripts
+- [x] All 110 story panels plus cover, title and back cover drawn (GPT Image 2.5 on Higgsfield, ~350 credits). Consistency: character sheets plus the page's first panel as a "same scene" reference on every later panel.
+- [x] Lettering: face boxes marked per panel; bubbles, captions and SFX placed to avoid faces; tails capped and kept off other faces; auto-fit text. Font: Comic Neue (OFL).
+- [x] Print layout: 8.5x11 in trim + 0.125 in bleed at 300 dpi, face-aware panel cropping, 32 pages (multiple of 4); print PDF + screen PDF.
+- [ ] Move the prototype scripts (prompt builder, assembler, print layout) into apps/worker with tests
+- [ ] Automatic face detection (manual face boxes for now); vision QA stage
+- [ ] Crop-mark proof variant; upscale panels to a true 300 dpi at full width
+
 ## Decisions
 - Image generator: GPT Image 2.5 via Higgsfield (built behind the swappable `ImageProvider` interface). Still to confirm: that its API accepts reference images and fixed seeds.
 
@@ -41,6 +49,7 @@
 - Auth method
 
 ## Log
+- 2026-11-14: First full family book finished and exported as print and screen PDFs (kept private, out of git).
 - 2026-11-14: Character sheets for the first family book generated and approved. Next: re-run the storyboard with final names, then a sample page.
 - 2026-11-14: Real brief folder `briefs/` is git-ignored (repo is public). A run now starts fresh when the brief in the output folder changes.
 - 2026-11-14: Second real run crashed in our own outline checks when Claude wrote a one-page beat as [5]. Now normalised to [5, 5]; our rule checks run only after the schema passes, so a wrong shape triggers the retry instead of a crash.
