@@ -8,3 +8,6 @@ out/
 
 # Real customer/family briefs: never commit
 briefs/
+
+# Exported story text from real briefs: never commit
+*_story.txt
