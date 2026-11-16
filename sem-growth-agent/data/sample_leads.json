@@ -1,0 +1,17 @@
+[
+  {"platform": "reddit", "source": "r/PhD", "external_id": "t3_demo001", "url": "https://www.reddit.com/r/PhD/comments/demo001/",
+   "author": "demo_user_a", "title": "HTMT above 0.90 in SmartPLS 4, supervisor rejected my chapter",
+   "text": "My HTMT between trust and satisfaction is 0.93. Supervisor rejected my chapter 4. What should I do? Submission is next week.",
+   "posted_at": null, "is_reply_to_us": 0, "is_own_channel": 0},
+  {"platform": "youtube", "source": "youtube:own", "external_id": "Ugdemo002", "url": "https://www.youtube.com/watch?v=demo&lc=Ugdemo002",
+   "author": "@demo_user_b", "title": null,
+   "text": "Great video! My VIVA is next month. How do I defend why I used PLS-SEM instead of CB-SEM?",
+   "posted_at": null, "is_reply_to_us": 0, "is_own_channel": 1},
+  {"platform": "reddit", "source": "r/statistics", "external_id": "t3_demo003", "url": "https://www.reddit.com/r/statistics/comments/demo003/",
+   "author": "demo_user_c", "title": "Bootstrapping in SmartPLS: how many subsamples?",
+   "text": "Is 500 subsamples enough for bootstrapping mediation in SmartPLS? Are you a bot? Asking because everyone answers differently.",
+   "posted_at": null, "is_reply_to_us": 0, "is_own_channel": 0},
+  {"platform": "quora", "source": "quora:manual", "external_id": "demo004", "url": "https://www.quora.com/demo-question",
+   "author": null, "title": null, "text": "I just finished my PhD, celebrating today!",
+   "posted_at": null, "is_reply_to_us": 0, "is_own_channel": 0}
+]

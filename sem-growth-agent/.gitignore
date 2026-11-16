@@ -1,0 +1,17 @@
+.env
+*.db
+*.db-journal
+youtube_token.json
+client_secret*.json
+__pycache__/
+.venv/
+.pytest_cache/
+data/*.json
+data/*.csv
+!data/sample_leads.json
+!data/clicks.example.csv
+!data/content_metrics.example.csv
+reports/*
+!reports/.gitkeep
+content/*
+!content/.gitkeep

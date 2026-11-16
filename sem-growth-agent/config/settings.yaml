@@ -1,0 +1,106 @@
+# SEM Growth Agent settings. Edit freely; API keys go in .env, never here.
+
+timezone: Asia/Kuala_Lumpur
+
+store:
+  # Your Whop store link, without a trailing slash.
+  base_url: https://whop.com/your-store
+  products:
+    sem_guide:
+      name: Mastering SEM with SmartPLS 4
+      slug: sem-guide                 # the part of the Whop link after your store name
+      whop_product_id: ""             # prod_... (run `python -m growth_agent whop-products` to find it)
+      cta: "Full step-by-step with screenshots is in Mastering SEM with SmartPLS 4 on Whop. Link in bio."
+      reply_cta: "I have a full checklist for this in my SmartPLS guide if you want it:"
+    viva_kit:
+      name: "VIVA Ready: Quantitative Thesis VIVA Kit"
+      slug: viva-kit
+      whop_product_id: ""
+      cta: "I put 50+ likely VIVA questions + model answers in the VIVA Kit. Link in bio."
+      reply_cta: "I put 50+ likely VIVA questions and model answers in my VIVA Kit if it helps:"
+
+models:
+  drafting: claude-sonnet-5-5         # replies and content
+  triage: claude-haiku-5-5            # scoring leads
+
+scout:
+  min_urgency: 7                      # only leads scoring this or more get a draft
+  lookback_hours: 48
+  max_leads_per_source: 25
+  keywords:
+    - SmartPLS
+    - SmartPLS 4
+    - PLS-SEM
+    - SEM analysis
+    - HTMT
+    - AVE CR
+    - discriminant validity
+    - bootstrapping SmartPLS
+    - mediation moderation
+    - thesis VIVA
+    - quantitative thesis
+    - how to defend thesis
+    - SmartPLS error
+    - model fit SmartPLS
+  reddit_subreddits: [PhD, GradSchool, statistics, research, AskAcademia, Thesis]
+  youtube_queries: [SmartPLS 4 tutorial, PLS-SEM SmartPLS, HTMT discriminant validity]
+  youtube_videos_per_query: 5         # each search costs 100 of your 10,000 daily quota units
+  x_queries: ['"SmartPLS" help -is:retweet', '"thesis defense" quantitative -is:retweet']
+
+engager:
+  max_replies_per_day_per_platform: 20
+  min_gap_minutes: 10
+  max_gap_minutes: 20
+  same_user_cooldown_hours: 24
+  link_window: 3                      # at most 1 link in any 3 consecutive replies
+  always_disclose_ai: false           # true = every reply ends with a short AI-assisted note
+  ai_disclosure: "(Drafted with AI assistance and reviewed by me before posting.)"
+  # Platforms the agent may post to by API once YOU approve a reply.
+  # Everything else is "post by hand": the review screen gives you the text and link.
+  api_posting: [reddit, youtube, x]
+
+creator:
+  pieces_per_day: 3
+  longform_weekday: sunday
+  reddit_cta: "Happy to share my full checklist if anyone wants it."
+  pillars:
+    pain_killer: 'Pain Killer, e.g. "Why your HTMT is > 0.90 and how to fix it in 2 minutes"'
+    viva_prep: 'VIVA Prep, e.g. "Examiner will ask you this about your mediation. Answer like this"'
+    proof_process: 'Proof / Process, e.g. "Here is how I check a measurement model before structural model"'
+    mistake: 'Mistake, e.g. "3 mistakes that make supervisors reject your SEM chapter"'
+  # Daily rotation of formats: (platform, format)
+  formats:
+    - [youtube, shorts_script]
+    - [tiktok, tiktok_script]
+    - [x, thread]
+    - [reddit, value_post]
+    - [linkedin, post]
+
+analyst:
+  run_at: "21:00"
+  sale_weight: 50
+  click_weight: 2
+  comment_weight: 0.5
+  save_weight: 0.3
+  view_weight: 0.01
+
+guardrails:
+  # Phrases that are never allowed in anything the agent writes (case-insensitive regex).
+  banned_patterns:
+    - 'guarante'                       # guarantee / guaranteed
+    - '100\s*%\s*pass'
+    - '\bwill pass\b'
+    - '\bpass (your|the) viva\b'
+    - '\bpublish(ed|ing)? guaranteed\b'
+    - '\bsure pass\b'
+    - '\bwrite (your|the) (thesis|dissertation|chapter|analysis) for you\b'
+    - '\bdo (your|the) (thesis|analysis|chapter) for you\b'
+    - 'ghostwrit'
+    - '\bmy (students?|clients?|customers?) (all )?passed\b'
+  max_chars:
+    x: 280
+    youtube: 1500
+    reddit: 3000
+    tiktok: 150
+    linkedin: 1250
+    other: 2000
